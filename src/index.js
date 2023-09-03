@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import'./bootstrapt-owerride.scss';
 import App from './App';
+import UserSignupPage from './pages/UserSignupPage';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <UserSignupPage />
   </React.StrictMode>
 );
 
