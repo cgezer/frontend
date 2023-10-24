@@ -1,16 +1,22 @@
-import React from 'react';
+import React from "react";
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import'./bootstrapt-owerride.scss';
-import App from './App';
-import UserSignupPage from './pages/UserSignupPage';
 import reportWebVitals from './reportWebVitals';
+import UserSignupPage from './pages/UserSignupPage';
+import LoginPage from './pages/LoginPage';
 import './i18n';
+import LanguageSelector from './components/LanguageSelector';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <UserSignupPage />
+    <div>
+    <UserSignupPage/>
+    <LanguageSelector/>  
+    </div>
+    
   </React.StrictMode>
 );
 

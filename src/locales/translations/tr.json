@@ -1,11 +1,11 @@
 {
-    "signUp": "Kayit ol",
-    "username": "Kullanici adi",
+    "signUp": "Kayıt ol",
+    "username": "Kullanıcı adı",
     "email": "E-posta",
     "password": "Şifre",
-    "passwordRepeat": "Şifre Tekrari",
-    "passwordMismatch": "Sifreniz eslesmiyor",
-    "genericError": "Beklenmedik bir hata olustu. Lutfen tekrar deneyin",
-    "userNotFoundError": "Kullanici bulunamadi",
-    "login": "Giris yap"
+    "passwordRepeat": "Şifre Tekrarı",
+    "passwordMismatch": "Şifreniz eşleşmiyor",
+    "genericError": "Beklenmedik bir hata oluştu. Lütfen tekrar deneyin",
+    "userNotFoundError": "Kullanıcı bulunamadı",
+    "login": "Giriş yap"
   }
