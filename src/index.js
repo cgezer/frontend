@@ -7,19 +7,12 @@ import UserSignupPage from './pages/UserSignupPage';
 import LoginPage from './pages/LoginPage';
 import './i18n';
 import LanguageSelector from './components/LanguageSelector';
-
+import ApiProgress from "./shared/ApiProgress";
+import App from '../src/container/App'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <div>
-    <UserSignupPage/>
-    <LanguageSelector/>  
-    </div>
-    
-  </React.StrictMode>
+root.render(<App/>
 );
-
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
