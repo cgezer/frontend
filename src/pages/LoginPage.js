@@ -24,10 +24,10 @@ const LoginPage = (props) => {
   };
 
   const navigate = useNavigate();
-
   const onClickLogin = async (event) => {
     event.preventDefault();
     const { username, password } = state;
+    const {onLoginSuccess} = props;
     const creds = {
       username,
       password,
@@ -39,6 +39,7 @@ const LoginPage = (props) => {
     try {
       await login(creds);
       navigate("/");
+      onLoginSuccess(username);
     } catch (apiError) {
       setState((prevState) => ({
         ...prevState,
