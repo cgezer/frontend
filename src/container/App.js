@@ -21,14 +21,16 @@ class App extends Component {
   };
 
   onLogoutSuccess = () => {
+    localStorage.removeItem('username'); // Kullanıcı çıkış yaptığında localStorage'daki kullanıcı adını temizle
     this.setState({
       isLoggedIn: false,
       username: undefined
     });
   };
-
   render() {
     const { isLoggedIn, username } = this.state;
+    console.log("App-isLoggedIn",isLoggedIn);
+    console.log("App-username",username);
     return (
       <div>
         <Router>
@@ -46,7 +48,7 @@ class App extends Component {
               />
             )}
             <Route path="/signup" element={<UserSignupPage />} />
-            <Route path="/user/:username" element={<UserPage />} />
+            <Route path="/user/:username" element={<UserPage username={username}/>} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Router>
@@ -55,5 +57,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;

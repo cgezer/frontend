@@ -7,6 +7,8 @@ class TopBar extends Component {
 
   render() {
     const { t, isLoggedIn, username,onLogoutSuccess}=this.props;
+    console.log("TopBar - Render - isLoggedIn:", this.props.isLoggedIn);
+    console.log("TopBar - Render - username:", this.props.username);
    
 
     let links = (
@@ -27,9 +29,9 @@ class TopBar extends Component {
             links=(
               <ul className="navbar-nav" style={{ marginLeft: 'auto' }}> 
               <li>
-                <Link className='nav-link' to={`/user/${username}`}>
-                {username}
-                </Link>                
+              <Link className='nav-link' to={`/user/${username}`}>
+              {username} 
+            </Link>            
               </li>
               <li className="nav-link" to="/" onClick={onLogoutSuccess} style={{cursor:'pointer'}}>{t('Logout')}</li>
               </ul>

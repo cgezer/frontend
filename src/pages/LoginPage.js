@@ -16,6 +16,7 @@ const LoginPage = (props) => {
 
   const onChange = (event) => {
     const { name, value } = event.target;
+    console.log(name, value); // Bu satırı ekleyin
     setState((prevState) => ({
       ...prevState,
       [name]: value,
@@ -27,6 +28,7 @@ const LoginPage = (props) => {
   const onClickLogin = async (event) => {
     event.preventDefault();
     const { username, password } = state;
+    console.log("Clicked Login with:", username, password); // Bu satırı ekleyin
     const {onLoginSuccess} = props;
     const creds = {
       username,
