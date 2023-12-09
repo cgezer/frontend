@@ -4,9 +4,10 @@ import { withTranslation } from "react-i18next";
 import { login } from "../api/apiCalls";
 import ButtonWithProgress from "../components/ButtonWithProgress";
 import { withApiProgress } from "../shared/ApiProgress";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../shared/AuthenticationContext";
 
-const LoginPage = (props) => {
+const LoginPage = ({ t, pendingApiCall }) => {
   const [state, setState] = useState({
     username: null,
     password: null,
@@ -14,44 +15,47 @@ const LoginPage = (props) => {
     pendingApiCall: false,
   });
 
+  const { username, password, error } = state;
+  const { onLoginSuccess } = useAuth();
+  const navigate = useNavigate();
+
   const onChange = (event) => {
     const { name, value } = event.target;
-    console.log(name, value); // Bu satırı ekleyin
-    setState((prevState) => ({
-      ...prevState,
+    console.log(name, value);
+    setState({
+      ...state,
       [name]: value,
       error: null,
-    }));
+    });
   };
 
-  const navigate = useNavigate();
   const onClickLogin = async (event) => {
     event.preventDefault();
-    const { username, password } = state;
-    console.log("Clicked Login with:", username, password); // Bu satırı ekleyin
-    const {onLoginSuccess} = props;
     const creds = {
       username,
       password,
     };
-    setState((prevState) => ({
-      ...prevState,
+    setState({
+      ...state,
       error: null,
-    }));
+    });
     try {
-      await login(creds);
-      navigate("/");
-      onLoginSuccess(username);
+      const response = await login(creds);
+      navigate("/"); // Ana sayfaya yönlendirme
+
+      const authState = {
+        ...response.data,
+        password
+      };
+      onLoginSuccess(authState);
     } catch (apiError) {
-      setState((prevState) => ({
-        ...prevState,
-        error: apiError.response.data.message,
-      }));
+      setState({
+        ...state,
+        // error: apiError.response.data.message,
+      });
     }
   };
 
-  const { t, pendingApiCall } = props;
-  const { username, password, error } = state;
   const buttonEnabled = username && password;
 
   return (
@@ -79,5 +83,4 @@ const LoginPage = (props) => {
   );
 };
 
-const LoginPageWithTranslation = withTranslation()(LoginPage);
-export default withApiProgress(LoginPageWithTranslation, "/api/1.0/auth");
+export default withTranslation()(withApiProgress(LoginPage, "/api/1.0/auth"));

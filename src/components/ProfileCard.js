@@ -1,22 +1,19 @@
-// ProfileCard.js
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Authentication } from "../shared/AuthenticationContext";
 
-const ProfileCard = props => {
-  const { username } = useParams();
-  const loggedInUsername = props.username;
-  console.log("profileCard-useParams-username",username);
-    console.log("profileCard-Path-username",loggedInUsername);
+const ProfileCard = () => {
+  const navigate = useNavigate();
+  const { username: pathUsername } = useParams();
+  const value = React.useContext(Authentication);
+  const loggedInUsername = value.state.username;
+  let message = "We cannot edit";
 
-  let message = "We can not edit";
-
-  if (username === loggedInUsername) {
+  if (pathUsername === loggedInUsername) {
     message = "We can edit";
   }
 
-  return (
-    <div>{message}</div>
-  );
+  return <div>{message}</div>;
 };
 
 export default ProfileCard;

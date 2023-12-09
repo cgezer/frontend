@@ -2,12 +2,11 @@
 import React from 'react';
 import ProfileCard from '../components/ProfileCard';
 
-const UserPage = (props) => {
-  
-    console.log("UserPage-username",props.username);
+const UserPage = props => {
+
   return (
     <div className='container'>
-      <ProfileCard username={props.username} /> {/* Kullanıcı adını ProfileCard bileşenine iletin */}
+      <ProfileCard /> {/* Kullanıcı adını ProfileCard bileşenine iletin */}
     </div>
   );
 };

@@ -4,52 +4,25 @@ import LanguageSelector from "../components/LanguageSelector";
 import LoginPage from "../pages/LoginPage";
 import HomePage from "../pages/HomePage";
 import UserPage from "../pages/UserPage";
-import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Navigate,Redirect } from "react-router-dom";
 import TopBar from "../components/TopBar";
+import {Authentication} from "../shared/AuthenticationContext";
 
 class App extends Component {
-  state = {
-    isLoggedIn: false,
-    username: undefined
-  };
-
-  onLoginSuccess = (username) => {
-    this.setState({
-      username,
-      isLoggedIn: true
-    });
-  };
-
-  onLogoutSuccess = () => {
-    localStorage.removeItem('username'); // Kullanıcı çıkış yaptığında localStorage'daki kullanıcı adını temizle
-    this.setState({
-      isLoggedIn: false,
-      username: undefined
-    });
-  };
+  static contextType = Authentication; 
   render() {
-    const { isLoggedIn, username } = this.state;
-    console.log("App-isLoggedIn",isLoggedIn);
-    console.log("App-username",username);
+      const isLoggedIn  = this.context.state.isLoggedIn;
     return (
       <div>
         <Router>
-          <TopBar
-            isLoggedIn={isLoggedIn}
-            username={username}
-            onLogoutSuccess={this.onLogoutSuccess}
-          />
+          <TopBar />
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            {!isLoggedIn && (
-              <Route
-                path="/login"
-                element={<LoginPage onLoginSuccess={this.onLoginSuccess} />}
-              />
-            )}
-            <Route path="/signup" element={<UserSignupPage />} />
-            <Route path="/user/:username" element={<UserPage username={username}/>} />
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="/" Component={HomePage} />
+            {!isLoggedIn && 
+            <Route path="/login" Component={LoginPage} />}
+            <Route path="/signup" Component={UserSignupPage} />
+            <Route path="/user/:username" Component={UserPage} />
+            <Route path="*" element={<Navigate to="/" />} />       
           </Routes>
         </Router>
         <LanguageSelector />
